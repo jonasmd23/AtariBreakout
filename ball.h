@@ -2,39 +2,62 @@
 #define BALL_H
 
 #include <stdbool.h>
+#include <stdint.h>
 #include "lcd.h"
 
+// Ball structure
 typedef struct {
-    float x, y;       // Ball position
-    float dx, dy;     // Velocity
-    float radius;     // Ball radius
-    bool lost;        // True if ball fell below the screen
-    color_t color;    // Ball color
-} Ball;
+    float x;              // x position
+    float y;              // y position
+    float dx;             // x velocity
+    float dy;             // y velocity
+    float radius;         // ball radius
+    color_t color;        // ball color
+    uint8_t currentState; // internal state machine state
+    bool launch;          // flag to launch ball
+} ball_t;
 
-// Ball speed multiplier for increasing difficulty
-extern float speed_multiplier;
+/************************ Initialization *************************/
+// Initialize the ball to starting position and state
+void ball_init(ball_t *ball);
 
-// Initialize the ball in the center of the screen
-void ball_init(Ball *ball);
+/************************ Control Functions *************************/
+// Launch the ball (start movement)
+void ball_launch(ball_t *ball);
 
-// Update ball position; dt = time since last frame in seconds
-void ball_tick(Ball *ball, float dt);
+// Reset ball to starting position
+void ball_reset(ball_t *ball);
 
-// Check and handle collisions with screen walls
-void ball_check_wall_collision(Ball *ball);
+// Move to next round with increased speed
+void ball_next_round(ball_t *ball);
 
-// Check collision with platform
-void ball_check_platform_collision(Ball *ball,
+/************************ Status Functions *************************/
+// Get ball position
+void ball_get_pos(ball_t *ball, coord_t *x, coord_t *y);
+
+// Check if ball is currently moving
+bool ball_is_moving(ball_t *ball);
+
+// Check if ball was lost (fell off bottom)
+bool ball_is_lost(ball_t *ball);
+
+/************************ Collision Functions *************************/
+// Check and handle wall collisions
+void ball_check_wall_collision(ball_t *ball);
+
+// Check and handle platform collision
+void ball_check_platform_collision(ball_t *ball,
                                    float px, float py,
                                    float pw, float ph);
 
-// Check collision with a brick; return true if collision happened
-bool ball_check_brick_collision(Ball *ball,
+// Check and handle brick collision
+// Returns true if collision occurred
+bool ball_check_brick_collision(ball_t *ball,
                                 float bx, float by,
                                 float bw, float bh);
 
-// Draw the ball on the LCD
-void ball_draw(Ball *ball);
+/************************ Tick Function *************************/
+// Update ball state machine (call every frame)
+void ball_tick(ball_t *ball);
 
-#endif
+#endif // BALL_H

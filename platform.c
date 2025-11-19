@@ -7,6 +7,7 @@
 #include "cursor.h"
 #include "platform.h"
 #include "config.h"
+#include "joy.h"
 
 #define SCREEN_WIDTH LCD_W
 #define SCREEN_HEIGHT LCD_H

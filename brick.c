@@ -105,10 +105,10 @@ void bricks_init(brick_grid_t *grid) {
             //
             switch (r) {
                 case 0: color = RED; break;
-                case 1: color = ORANGE; break;
-                case 2: color = YELLOW; break;
-                case 3: color = GREEN; break;
-                case 4: color = CYAN; break;
+                case 1: color = WHITE; break;
+                case 2: color = BLUE; break;
+                case 3: color = RED; break;
+                case 4: color = WHITE; break;
                 default: color = WHITE; break;
             }
             

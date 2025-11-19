@@ -46,18 +46,16 @@ void ball_launch(ball_t *ball) {
         ball->launch = true;
 }
 
-//
 void ball_reset(ball_t *ball) {
     if (!ball) return;
     ball->x = SCREEN_WIDTH / 2;
     ball->y = SCREEN_HEIGHT / 2;
     ball->dx = SPEED;
-    ball->dy = SPEED;
+    ball->dy = -SPEED;  // Fixed: should be negative to go upward
     ball->currentState = idle_st;
     ball->launch = false;
 }
 
-//
 void ball_next_round(ball_t *ball) {
     if (!ball) return;
     ball_init(ball);
@@ -146,7 +144,7 @@ bool ball_check_brick_collision(ball_t *ball,
     if (ball->y < by) 
         closestY = by;
     else if (ball->y > by + bh) 
-        closestY = bx + bh;
+        closestY = by + bh;  // Fixed: was bx + bh
 
     float dx = ball->x - closestX;
     float dy = ball->y - closestY;
