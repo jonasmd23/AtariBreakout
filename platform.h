@@ -1,24 +1,30 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#include <stdbool.h>
+#include <stdint.h>
 #include "lcd.h"
-#include "joy.h"
 
 // Platform structure
 typedef struct {
-    float x, y;        // Top-left position
-    float width, height;
-    color_t color;
-    float move_speed;  // pixels per second
-} Platform;
+    float x;                    // Current x position
+    float y;                    // Current y position
+    float width;                // Platform width
+    float height;               // Platform height
+    color_t color;              // Platform color
+    float move_speed;           // Movement speed
+    uint32_t currentState;      // Current state
+} platform_t;
 
-// Initialize platform at the bottom center of the screen
-void platform_init(Platform *p, float move_speed);
+/************************ Function Prototypes *************************/
 
-// Update platform position based on joystick input and delta time
-void platform_update(Platform *p, float dt);
+// Initialize platform structure
+void platform_init(platform_t *p, uint32_t move_speed);
 
-// Draw platform on the screen
-void platform_draw(Platform *p);
+// Control functions
+void platform_get_pos(platform_t *p, float *x, float *y, float *w, float *h);
 
-#endif
+// Main tick function
+void platform_tick(platform_t *p);
+
+#endif // PLATFORM_H

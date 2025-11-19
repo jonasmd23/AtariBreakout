@@ -2,36 +2,47 @@
 #define BRICK_H
 
 #include <stdbool.h>
+#include <stdint.h>
 #include "lcd.h"
 
-// One brick structure
+#define MAX_BRICK_ROWS 8
+#define MAX_BRICK_COLS 12
+
+// Single brick structure
 typedef struct {
-    float x, y;      // Top-left position
-    float width, height;
-    bool alive;      // True if brick not yet destroyed
-    color_t color;
-} Brick;
+    float x;                    // X position
+    float y;                    // Y position
+    float width;                // Brick width
+    float height;               // Brick height
+    color_t color;              // Brick color
+    uint32_t currentState;      // Current state
+    bool destroy_me;            // Flag to destroy brick
+} brick_t;
 
-// Brick grid structure
+// Grid of bricks
 typedef struct {
-    Brick bricks[5][10]; // 5 rows, 10 columns
-    int rows;
-    int cols;
-    float spacing_x;
-    float spacing_y;
-} BrickGrid;
+    brick_t bricks[MAX_BRICK_ROWS][MAX_BRICK_COLS];
+    int rows;                   // Number of rows in use
+    int cols;                   // Number of columns in use
+    int spacing_x;              // Horizontal spacing
+    int spacing_y;              // Vertical spacing
+} brick_grid_t;
 
-// Initialize the brick grid
-void bricks_init(BrickGrid *grid);
+/************************ Function Prototypes *************************/
 
-// Draw all bricks
-void bricks_draw(BrickGrid *grid);
+// Initialize brick grid
+void bricks_init(brick_grid_t *grid);
 
-// Check if the ball collides with any brick
-// Returns true if a brick was hit, and marks it dead
-bool bricks_check_collision(BrickGrid *grid, float ball_x, float ball_y, float ball_radius);
+// Main tick function for all bricks
+void bricks_tick(brick_grid_t *grid);
 
-// Returns true if all bricks are destroyed
-bool bricks_all_cleared(BrickGrid *grid);
+// Check collision with ball
+bool bricks_check_collision(brick_grid_t *grid, float ball_x, float ball_y, float ball_radius);
 
-#endif
+// Check if all bricks are cleared
+bool bricks_all_cleared(brick_grid_t *grid);
+
+// Get count of alive bricks
+uint32_t bricks_get_alive_count(brick_grid_t *grid);
+
+#endif // BRICK_H

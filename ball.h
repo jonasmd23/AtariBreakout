@@ -19,7 +19,7 @@ extern float speed_multiplier;
 void ball_init(Ball *ball);
 
 // Update ball position; dt = time since last frame in seconds
-void ball_update(Ball *ball, float dt);
+void ball_tick(Ball *ball, float dt);
 
 // Check and handle collisions with screen walls
 void ball_check_wall_collision(Ball *ball);

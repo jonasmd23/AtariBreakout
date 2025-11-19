@@ -24,6 +24,7 @@ static const char *TAG = "lab07";
 
 #define CURSOR_SZ 7 // Cursor size (width & height) in pixels
 
+//
 #define CHK_RET(x) ({                                           \
         int32_t ret_val = (x);                                  \
         if (ret_val != 0) {                                     \
