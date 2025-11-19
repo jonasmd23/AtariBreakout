@@ -2,15 +2,18 @@
 #define BALL_H
 
 #include <stdbool.h>
-#include "lcd.h"  // for coord_t and color_t
+#include "lcd.h"
 
 typedef struct {
     float x, y;       // Ball position
     float dx, dy;     // Velocity
     float radius;     // Ball radius
-    bool lost;        // True if ball fell below the platform
+    bool lost;        // True if ball fell below the screen
     color_t color;    // Ball color
 } Ball;
+
+// Ball speed multiplier for increasing difficulty
+extern float speed_multiplier;
 
 // Initialize the ball in the center of the screen
 void ball_init(Ball *ball);
