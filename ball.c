@@ -11,8 +11,8 @@
 #define SCREEN_WIDTH LCD_W
 #define SCREEN_HEIGHT LCD_H
 
-#define SPEED 150
-#define SIX 6
+#define SPEED 100
+#define RADIUS 3
 
 // Ball internal states
 enum ball_st_t {
@@ -33,7 +33,7 @@ void ball_init(ball_t *ball) {
     ball->y = SCREEN_HEIGHT / 2;
     ball->dx = SPEED;          // horizontal speed
     ball->dy = -SPEED;         // vertical speed
-    ball->radius = SIX;
+    ball->radius = RADIUS;
     ball->color = RED;
     ball->currentState = init_st;
     ball->launch = false;
@@ -59,9 +59,9 @@ void ball_reset(ball_t *ball) {
 void ball_next_round(ball_t *ball) {
     if (!ball) return;
     ball_init(ball);
-    speed_multiplier *= 1.1f;   // increase speed by 10% each round
-    if (speed_multiplier > 3.0f) 
-        speed_multiplier = 3.0f; // cap max speed
+    speed_multiplier *= 1.2f;   // increase speed by 20% each round
+    if (speed_multiplier > 2.0f) 
+        speed_multiplier = 2.0f; // cap max speed
 }
 
 /************************ Status Functions *************************/
@@ -101,7 +101,7 @@ void ball_check_wall_collision(ball_t *ball) {
         ball->dy *= -1;
     }
 }
-
+//
 void ball_check_platform_collision(ball_t *ball,
                                    float px, float py,
                                    float pw, float ph) {
@@ -128,6 +128,7 @@ void ball_check_platform_collision(ball_t *ball,
     }
 }
 
+//
 bool ball_check_brick_collision(ball_t *ball,
                                 float bx, float by,
                                 float bw, float bh) {
