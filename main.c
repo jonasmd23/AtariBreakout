@@ -22,7 +22,7 @@ static const char *TAG = "lab07";
 #define PER_MS ((uint32_t)(CONFIG_GAME_TIMER_PERIOD*1000))
 #define TIME_OUT 500 // ms
 
-#define CURSOR_SZ 7 // Cursor size (width & height) in pixels
+#define CURSOR_SZ 0 // Cursor size (width & height) in pixels
 
 //
 #define CHK_RET(x) ({                                           \
