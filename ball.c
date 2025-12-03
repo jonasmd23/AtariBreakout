@@ -49,7 +49,7 @@ void ball_launch(ball_t *ball) {
 void ball_reset(ball_t *ball) {
     if (!ball) return;
     ball->x = SCREEN_WIDTH / 2;
-    ball->y = SCREEN_HEIGHT / 2;
+    ball->y = SCREEN_HEIGHT - 20;
     ball->dx = SPEED;
     ball->dy = -SPEED;  // Fixed: should be negative to go upward
     ball->currentState = idle_st;
