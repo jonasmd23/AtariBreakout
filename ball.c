@@ -34,7 +34,7 @@ void ball_init(ball_t *ball) {
     ball->dx = SPEED;          // horizontal speed
     ball->dy = -SPEED;         // vertical speed
     ball->radius = RADIUS;
-    ball->color = RED;
+    ball->color = WHITE;
     ball->currentState = init_st;
     ball->launch = false;
 }
