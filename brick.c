@@ -8,6 +8,8 @@
 #include "brick.h"
 #include "config.h"
 #include "ball.h"        // Needed so we can bounce the ball
+#include "userSound.h" 
+#include "sound.h"
 
 #define SCREEN_WIDTH LCD_W
 #define SCREEN_HEIGHT LCD_H
@@ -162,7 +164,7 @@ bool bricks_check_collision(brick_grid_t *grid,
                 } else {
                     game_ball.dy *= -1;   // Vertical bounce
                 }
-
+                sound_start(userSound, USERSOUND_SAMPLES, false);
                 // Mark brick for removal
                 b->destroy_me = true;
 
