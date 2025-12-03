@@ -14,8 +14,9 @@
 #include "config.h"
 // sound support
 #include "missileLaunch.h"
+#include "bigx.h"
 
-#define PLAT_MOVE 300
+#define THREE_HUN 300
 #define SHOTS_X 10
 #define STATS_Y 10
 
@@ -32,7 +33,7 @@ void game_init(void)
 {
     // Initialize game objects
     ball_init(&game_ball);
-    platform_init(&game_platform, PLAT_MOVE); // 300 = move speed
+    platform_init(&game_platform, THREE_HUN); // 300 = move speed
     bricks_init(&game_bricks);
     
     // Initialize stats
@@ -76,6 +77,7 @@ void game_tick(void)
     // Check if ball was lost
     if (ball_is_lost(&game_ball)) {
         // Reset ball for next attempt
+        sound_start(bigx,BIGX_SAMPLES, false);
         game_init();
     }
     
