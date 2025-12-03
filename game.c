@@ -15,7 +15,7 @@
 // sound support
 #include "missileLaunch.h"
 
-#define THREE_HUN 300
+#define PLAT_MOVE 300
 #define SHOTS_X 10
 #define STATS_Y 10
 
@@ -32,7 +32,7 @@ void game_init(void)
 {
     // Initialize game objects
     ball_init(&game_ball);
-    platform_init(&game_platform, THREE_HUN); // 300 = move speed
+    platform_init(&game_platform, PLAT_MOVE); // 300 = move speed
     bricks_init(&game_bricks);
     
     // Initialize stats
