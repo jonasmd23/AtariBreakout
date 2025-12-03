@@ -76,7 +76,7 @@ void game_tick(void)
     // Check if ball was lost
     if (ball_is_lost(&game_ball)) {
         // Reset ball for next attempt
-        ball_reset(&game_ball);
+        game_init();
     }
     
     // Launch ball with button press (BTN_A or BTN_START)
